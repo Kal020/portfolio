@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de développeur frontend spécialisé en HTML, CSS, Tailwind CSS, JavaScript et PWA. Découvrez mes projets, compétences et contactez-moi.">
+    <title>Portfolio | Développeur Frontend Créatif</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-dot"></div>
+
+    <!-- Background Decoration Grid -->
+    <div class="bg-grid-container">
+        <div class="bg-grid"></div>
+        <div class="bg-glow bg-glow-1"></div>
+        <div class="bg-glow bg-glow-2"></div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+        <div class="nav-container container">
+            <a href="#home" class="logo">
+                <span class="logo-accent">&lt;</span>K<span class="logo-accent">/&gt;</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Accueil</a></li>
+                    <li><a href="#about" class="nav-link">À Propos</a></li>
+                    <li><a href="#skills" class="nav-link">Compétences</a></li>
+                    <li><a href="#projects" class="nav-link">Projets</a></li>
+                    <li><a href="#contact" class="nav-link nav-btn">Me Contacter</a></li>
+                </ul>
+            </nav>
+
+            <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero section" id="home">
+            <div class="hero-container container grid">
+                <div class="hero-content">
+                    <span class="hero-subtitle">Bienvenue sur mon portfolio</span>
+                    <h1 class="hero-title">
+                        Concevoir des interfaces <span class="text-gradient">modernes</span> &amp; <span class="text-gradient">interactives</span>
+                    </h1>
+                    <p class="hero-description">
+                        Passionné par le développement web, je crée des expériences utilisateur fluides, performantes et esthétiques. Spécialisé dans les technologies du web moderne.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+                        <a href="#contact" class="btn btn-secondary">Discutons ensemble</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card-wrapper">
+                        <div class="hero-card glass">
+                            <div class="card-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <span class="tab-title">skills.json</span>
+                            </div>
+                            <div class="card-body">
+                                <pre><code><span class="code-keyword">const</span> developer = {
+  name: <span class="code-string">"Kalwardin"</span>,
+  role: <span class="code-string">"Frontend Developer"</span>,
+  skills: [
+    <span class="code-string">"HTML5"</span>, 
+    <span class="code-string">"CSS3"</span>, 
+    <span class="code-string">"Tailwind CSS"</span>, 
+    <span class="code-string">"JavaScript"</span>,
+    <span class="code-string">"PWA"</span>
+  ],
+  passion: <span class="code-string">"UI / UX &amp; Interactivité"</span>,
+  availableForHire: <span class="code-literal">true</span>
+};</code></pre>
+                            </div>
+                        </div>
+                        <div class="floating-badge badge-1 glass">
+                            <span class="badge-icon">⚡</span>
+                            <span class="badge-text">Interactive UI</span>
+                        </div>
+                        <div class="floating-badge badge-2 glass">
+                            <span class="badge-icon">🎨</span>
+                            <span class="badge-text">Clean Code</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <a href="#about" class="scroll-mouse" aria-label="Faire défiler vers le bas">
+                    <span class="scroll-wheel"></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about section" id="about">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Qui suis-je ?</span>
+                    <h2 class="section-title">À Propos De Moi</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="about-container grid">
+                    <div class="about-img-container">
+                        <div class="about-card glass">
+                            <div class="about-avatar">
+                                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="avatar-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="var(--primary-color)" />
+                                            <stop offset="100%" stop-color="var(--accent-color)" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="40" r="22" fill="url(#avatar-grad)" />
+                                    <path d="M20,80 C20,60 30,55 50,55 C70,55 80,60 80,80" fill="url(#avatar-grad)" />
+                                </svg>
+                            </div>
+                            <h3 class="about-card-name">Kalwardin</h3>
+                            <p class="about-card-role">Développeur Frontend</p>
+                            <div class="about-card-info">
+                                <div class="info-item">
+                                    <span class="info-icon">📍</span>
+                                    <span class="info-text">France / À distance</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">✉️</span>
+                                    <span class="info-text truncate">Kalwardin963@gmail.com</span>
+                                </div>
+                            </div>
+                            <div class="about-card-cta">
+                                <a href="#contact" class="btn btn-sm btn-primary w-full text-center">Me Contacter</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-content">
+                        <h3 class="about-heading">Développeur web créatif &amp; minutieux</h3>
+                        <p class="about-text">
+                            Je m'attache à concevoir des sites web qui ne sont pas seulement esthétiques, mais aussi hautement fonctionnels et faciles d'accès. Grâce à mon expertise en technologies front-end, je traduis des designs complexes en code propre, sémantique et réactif.
+                        </p>
+
+                        <!-- Interactive Tabs -->
+                        <div class="about-tabs">
+                            <div class="tabs-header">
+                                <button class="tab-btn active" data-tab="journey">Mon Parcours</button>
+                                <button class="tab-btn" data-tab="approach">Mon Approche</button>
+                            </div>
+                            <div class="tabs-content">
+                                <div class="tab-pane active" id="tab-journey">
+                                    <ul class="timeline">
+                                        <li class="timeline-item">
+                                            <div class="timeline-dot"></div>
+                                            <span class="timeline-date">Présent</span>
+                                            <h4 class="timeline-title">Développeur Frontend Indépendant</h4>
+                                            <p class="timeline-desc">Création d'interfaces web interactives et modernes pour divers clients. Intégration rigoureuse de maquettes Figma.</p>
+                                        </li>
+                                        <li class="timeline-item">
+                                            <div class="timeline-dot"></div>
+                                            <span class="timeline-date">2024 - 2025</span>
+                                            <h4 class="timeline-title">Spécialisation Technologies Front-End</h4>
+                                            <p class="timeline-desc">Approfondissement des frameworks CSS et de l'architecture JavaScript moderne pour des performances optimales.</p>
+                                        </li>
+                                        <li class="timeline-item">
+                                            <div class="timeline-dot"></div>
+                                            <span class="timeline-date">2022 - 2024</span>
+                                            <h4 class="timeline-title">Débuts en Intégration Web</h4>
+                                            <p class="timeline-desc">Apprentissage poussé et application concrète du HTML5, CSS3 sémantique et JavaScript Vanilla.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane" id="tab-approach">
+                                    <div class="approach-grid">
+                                        <div class="approach-item">
+                                            <div class="approach-num">01</div>
+                                            <h4 class="approach-title">Qualité &amp; Standard</h4>
+                                            <p class="approach-desc">Je privilégie un code sémantique HTML5 robuste, un CSS structuré et le respect des normes d'accessibilité (W3C).</p>
+                                        </div>
+                                        <div class="approach-item">
+                                            <div class="approach-num">02</div>
+                                            <h4 class="approach-title">Performance &amp; Responsive</h4>
+                                            <p class="approach-desc">Chaque interface est optimisée pour charger rapidement et s'adapter parfaitement à toutes les tailles d'écrans.</p>
+                                        </div>
+                                        <div class="approach-item">
+                                            <div class="approach-num">03</div>
+                                            <h4 class="approach-title">Interactivité &amp; Détail</h4>
+                                            <p class="approach-desc">L'ajout de micro-interactions et d'animations fluides améliore l'expérience utilisateur globale sans l'alourdir.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills section" id="skills">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Mes outils</span>
+                    <h2 class="section-title">Compétences Techniques</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="skills-grid">
+                    <!-- Skill Card: HTML5 -->
+                    <div class="skill-card glass">
+                        <div class="skill-icon-wrapper html-color">
+                            <svg class="skill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="skill-name">HTML5</h3>
+                        <p class="skill-description">Structure sémantique du web, accessibilité (ARIA), et optimisation SEO pour un référencement idéal.</p>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress html-progress" style="width: 0%"></div>
+                        </div>
+                        <span class="skill-percentage">95%</span>
+                    </div>
+
+                    <!-- Skill Card: CSS3 -->
+                    <div class="skill-card glass">
+                        <div class="skill-icon-wrapper css-color">
+                            <svg class="skill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="skill-name">CSS3</h3>
+                        <p class="skill-description">Mises en page avancées (Flexbox, Grid), animations clés en main, variables CSS et design adaptatif.</p>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress css-progress" style="width: 0%"></div>
+                        </div>
+                        <span class="skill-percentage">90%</span>
+                    </div>
+
+                    <!-- Skill Card: Tailwind CSS -->
+                    <div class="skill-card glass">
+                        <div class="skill-icon-wrapper tailwind-color">
+                            <svg class="skill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 3v18M3 12h18M12 3l8 9-8 9-8-9 8-9z"/>
+                            </svg>
+                        </div>
+                        <h3 class="skill-name">Tailwind CSS</h3>
+                        <p class="skill-description">Intégration ultra-rapide basée sur les classes utilitaires, customisation complète et interfaces hautement maintenables.</p>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress tailwind-progress" style="width: 0%"></div>
+                        </div>
+                        <span class="skill-percentage">92%</span>
+                    </div>
+
+                    <!-- Skill Card: JavaScript -->
+                    <div class="skill-card glass">
+                        <div class="skill-icon-wrapper js-color">
+                            <svg class="skill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12z"/>
+                                <path d="M12 18H8M12 14H8M12 10H8"/>
+                            </svg>
+                        </div>
+                        <h3 class="skill-name">JavaScript (ES6+)</h3>
+                        <p class="skill-description">Logique applicative, manipulation dynamique du DOM, requêtes asynchrones (Fetch/API), et gestion d'états.</p>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress js-progress" style="width: 0%"></div>
+                        </div>
+                        <span class="skill-percentage">88%</span>
+                    </div>
+
+                    <!-- Skill Card: PWA -->
+                    <div class="skill-card glass">
+                        <div class="skill-icon-wrapper pwa-color">
+                            <svg class="skill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18"/>
+                                <path d="M22 6L18 2M22 10L14 2"/>
+                            </svg>
+                        </div>
+                        <h3 class="skill-name">PWA</h3>
+                        <p class="skill-description">Applications Web Progressives : Service Workers, mise en cache hors ligne et installation sur écran d'accueil.</p>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress pwa-progress" style="width: 0%"></div>
+                        </div>
+                        <span class="skill-percentage">85%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects section" id="projects">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Mes réalisations</span>
+                    <h2 class="section-title">Projets Récents</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <!-- Projects Filter -->
+                <div class="projects-filters">
+                    <button class="filter-btn active" data-filter="all">Tous</button>
+                    <button class="filter-btn" data-filter="html-css">HTML / CSS</button>
+                    <button class="filter-btn" data-filter="tailwind">Tailwind CSS</button>
+                    <button class="filter-btn" data-filter="javascript">JavaScript</button>
+                    <button class="filter-btn" data-filter="pwa">PWA</button>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project Card 1 -->
+                    <article class="project-card glass" data-category="javascript">
+                        <div class="project-img-wrapper">
+                            <div class="project-placeholder js-bg">
+                                <span class="placeholder-icon">📊</span>
+                            </div>
+                            <div class="project-overlay">
+                                <a href="#" class="project-link" aria-label="Voir le projet">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-md">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">API Integration</span>
+                            </div>
+                            <h3 class="project-title">Tableau de bord financier interactif</h3>
+                            <p class="project-desc">Un dashboard complet affichant des données boursières en temps réel avec des graphiques dynamiques et interactifs.</p>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 2 -->
+                    <article class="project-card glass" data-category="tailwind">
+                        <div class="project-img-wrapper">
+                            <div class="project-placeholder tailwind-bg">
+                                <span class="placeholder-icon">🛍️</span>
+                            </div>
+                            <div class="project-overlay">
+                                <a href="#" class="project-link" aria-label="Voir le projet">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-md">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span class="tag">Tailwind CSS</span>
+                                <span class="tag">Responsive</span>
+                            </div>
+                            <h3 class="project-title">Landing Page SaaS E-Commerce</h3>
+                            <p class="project-desc">Plateforme marketing avec une structure optimisée pour la conversion, des animations CSS discrètes et une réactivité totale.</p>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 3 -->
+                    <article class="project-card glass" data-category="html-css">
+                        <div class="project-img-wrapper">
+                            <div class="project-placeholder html-bg">
+                                <span class="placeholder-icon">🌿</span>
+                            </div>
+                            <div class="project-overlay">
+                                <a href="#" class="project-link" aria-label="Voir le projet">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-md">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span class="tag">HTML5 / CSS3</span>
+                                <span class="tag">Aesthetics</span>
+                            </div>
+                            <h3 class="project-title">Site Vitrine - Agence Éco-Responsable</h3>
+                            <p class="project-desc">Un site vitrine épuré mettant l'accent sur les détails typographiques et des transitions fluides au défilement.</p>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 4 -->
+                    <article class="project-card glass" data-category="pwa">
+                        <div class="project-img-wrapper">
+                            <div class="project-placeholder pwa-bg">
+                                <span class="placeholder-icon">📱</span>
+                            </div>
+                            <div class="project-overlay">
+                                <a href="#" class="project-link" aria-label="Voir le projet">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-md">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span class="tag">PWA</span>
+                                <span class="tag">Offline Support</span>
+                            </div>
+                            <h3 class="project-title">Application Météo Progressive (PWA)</h3>
+                            <p class="project-desc">Une application météo installable sur mobile avec support hors ligne complet grâce aux Service Workers.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact section" id="contact">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Me contacter</span>
+                    <h2 class="section-title">Travaillons Ensemble</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="contact-container grid">
+                    <!-- Contact Cards -->
+                    <div class="contact-info">
+                        <h3 class="contact-heading">Vous avez un projet en tête ?</h3>
+                        <p class="contact-text">
+                            N'hésitez pas à me contacter par e-mail ou via le formulaire ci-contre. Je serai ravi d'échanger sur vos idées de projets et de vous aider à les concrétiser.
+                        </p>
+
+                        <div class="contact-cards">
+                            <!-- Email Card -->
+                            <div class="contact-card glass highlight">
+                                <div class="contact-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                        <polyline points="22,6 12,13 2,6"/>
+                                    </svg>
+                                </div>
+                                <div class="contact-card-content">
+                                    <span class="contact-card-label">Mon Adresse E-mail</span>
+                                    <span class="contact-card-value font-outfit" id="email-text">Kalwardin963@gmail.com</span>
+                                </div>
+                                <button class="btn-copy" id="btn-copy-email" aria-label="Copier l'adresse email" title="Copier l'email">
+                                    <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                    </svg>
+                                    <span class="tooltip" id="copy-tooltip">Copier</span>
+                                </button>
+                            </div>
+
+                            <!-- Social Card -->
+                            <div class="contact-card glass">
+                                <div class="contact-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                    </svg>
+                                </div>
+                                <div class="contact-card-content">
+                                    <span class="contact-card-label">GitHub</span>
+                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-card-link">github.com/Kalwardin</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-container">
+                        <form class="contact-form glass" id="contact-form">
+                            <!-- Cle d'acces gratuite Web3Forms (A remplacer par votre propre cle d'acces) -->
+                            <input type="hidden" name="access_key" value="VOTRE_CLE_REÇUE_ICI">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Nom complet</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Ex: Jean Dupont" required autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Adresse e-mail</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="Ex: jean.dupont@email.com" required autocomplete="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Sujet du message</label>
+                                <input type="text" id="subject" name="subject" class="form-input" placeholder="Ex: Proposition de projet" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="form-label">Votre message</label>
+                                <textarea id="message" name="message" rows="5" class="form-input" placeholder="Décrivez votre projet ou votre demande..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-submit w-full" id="btn-submit">
+                                <span class="submit-text">Envoyer le message</span>
+                                <span class="submit-spinner hidden"></span>
+                            </button>
+                            <div class="form-status hidden" id="form-status"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container container text-center">
+            <a href="#home" class="footer-logo">
+                <span class="logo-accent">&lt;</span>K<span class="logo-accent">/&gt;</span>
+            </a>
+            <p class="footer-text">
+                &copy; 2026 Kalwardin. Tous droits réservés.
+            </p>
+            <div class="footer-socials">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                </a>
+                <a href="#contact" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

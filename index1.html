@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Plateforme de réservation d'appartements de standing, villas de rêve et hôtels d'exception. Réservez votre séjour au meilleur prix." />
+  <title>StayLuxe | Location d'Appartements, Villas & Hôtels de Prestige</title>
+
+  <!-- Google Fonts : Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 (Icônes) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <!-- Leaflet CSS (Carte interactive) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Feuille de style dédiée -->
+  <link rel="stylesheet" href="rental.css" />
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="header-sticky">
+    <div class="container navbar">
+      <!-- Logo de la marque -->
+      <a href="#" class="brand-logo">
+        <i class="fa-solid fa-compass"></i>
+        <span>StayLuxe</span>
+        <span class="brand-tag">Séjours d'Élite</span>
+      </a>
+
+      <!-- Sélecteur de type d'hébergement central -->
+      <nav class="nav-center-links" aria-label="Type d'hébergement">
+        <button class="nav-pill active" data-type="all">
+          <i class="fa-solid fa-globe"></i> Tous les séjours
+        </button>
+        <button class="nav-pill" data-type="apartment">
+          <i class="fa-solid fa-building"></i> Appartements
+        </button>
+        <button class="nav-pill" data-type="house">
+          <i class="fa-solid fa-house-chimney-window"></i> Maisons & Villas
+        </button>
+        <button class="nav-pill" data-type="hotel">
+          <i class="fa-solid fa-hotel"></i> Hôtels & Spas
+        </button>
+      </nav>
+
+      <!-- Actions à droite -->
+      <div class="nav-right-actions">
+        <button class="btn-host" id="btn-open-host">
+          <i class="fa-solid fa-plus-circle" style="color: var(--primary); margin-right: 6px;"></i>
+          Mettre un bien en location
+        </button>
+        
+        <button class="btn-wishlist" id="btn-wishlist-top" title="Mes hébergements favoris">
+          <i class="fa-solid fa-heart"></i>
+          <span class="wishlist-count" id="wishlist-badge">0</span>
+        </button>
+
+        <button class="user-menu-btn" title="Menu utilisateur">
+          <i class="fa-solid fa-bars"></i>
+          <div class="user-avatar-mini">
+            <i class="fa-solid fa-user"></i>
+          </div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO & MOTEUR DE RECHERCHE FLOTTANT
+       ========================================================================== -->
+  <section class="hero-search-wrapper container">
+    <div class="search-bar-floating" id="search-bar">
+      <!-- Champ Destination -->
+      <div class="search-section">
+        <span class="label">Destination</span>
+        <input type="text" id="search-destination" placeholder="Paris, Bali, New York, Rome..." autocomplete="off" />
+      </div>
+
+      <div class="search-divider"></div>
+
+      <!-- Date d'Arrivée -->
+      <div class="search-section">
+        <span class="label">Arrivée</span>
+        <input type="date" id="search-checkin" />
+      </div>
+
+      <div class="search-divider"></div>
+
+      <!-- Date de Départ -->
+      <div class="search-section">
+        <span class="label">Départ</span>
+        <input type="date" id="search-checkout" />
+      </div>
+
+      <div class="search-divider"></div>
+
+      <!-- Voyageurs avec menu déroulant -->
+      <div class="search-section" id="search-guests-section" style="cursor: pointer;">
+        <span class="label">Voyageurs</span>
+        <span class="display-val" id="display-guests-label">1 voyageur</span>
+
+        <!-- Popup Compteur Voyageurs -->
+        <div class="guests-dropdown" id="guests-dropdown">
+          <div class="guest-row">
+            <div class="guest-info">
+              <h4>Adultes</h4>
+              <p>Âge : 13 ans et plus</p>
+            </div>
+            <div class="counter-controls">
+              <button class="btn-counter" id="btn-adults-dec" disabled>-</button>
+              <span class="counter-num" id="count-adults">1</span>
+              <button class="btn-counter" id="btn-adults-inc">+</button>
+            </div>
+          </div>
+
+          <div class="guest-row">
+            <div class="guest-info">
+              <h4>Enfants</h4>
+              <p>Âge : 2 à 12 ans</p>
+            </div>
+            <div class="counter-controls">
+              <button class="btn-counter" id="btn-children-dec" disabled>-</button>
+              <span class="counter-num" id="count-children">0</span>
+              <button class="btn-counter" id="btn-children-inc">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bouton de lancement de recherche -->
+      <button class="btn-search-main" id="btn-search-main">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>Rechercher</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CARROUSEL DE CATÉGORIES
+       ========================================================================== -->
+  <section class="categories-bar-wrapper">
+    <div class="container categories-container" id="categories-list">
+      <!-- Généré dynamiquement en JS -->
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       BARRE DE CONTRÔLE DES RÉSULTATS & FILTRES
+       ========================================================================== -->
+  <main class="container">
+    <div class="filter-controls-row">
+      <div class="results-count">
+        <span>Logements disponibles</span>
+        <span class="results-badge" id="results-count-badge">8 séjours d'exception</span>
+      </div>
+
+      <div class="filter-actions-group">
+        <!-- Switch pour inclure ou non les taxes -->
+        <label class="tax-switch-label" for="toggle-taxes">
+          <span>Afficher le prix total TTC</span>
+          <input type="checkbox" id="toggle-taxes" style="cursor: pointer;" />
+        </label>
+
+        <!-- Bascule Carte Interactive -->
+        <button class="btn-filter-toggle" id="btn-map-toggle">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>Afficher la carte</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         LAYOUT PRINCIPAL (GRILLE HYBRIDE AVEC CARTE)
+         ========================================================================== -->
+    <section class="main-content-layout" id="main-layout">
+      <!-- Grille des logements -->
+      <div class="listings-grid" id="listings-grid">
+        <!-- Généré dynamiquement en JS -->
+      </div>
+
+      <!-- Conteneur Carte Leaflet latérale -->
+      <aside class="map-view-container" id="map-container">
+        <div id="rental-map"></div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL 1 : FICHE DÉTAILLÉE DU LOGEMENT (IMMERSIVE)
+       ========================================================================== -->
+  <div class="modal-overlay" id="listing-detail-modal">
+    <div class="modal-content-card">
+      <button class="modal-close-btn" id="modal-detail-close" title="Fermer la fenêtre">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- En-tête -->
+      <div class="detail-header">
+        <h2 class="detail-title" id="detail-title">Titre du logement</h2>
+        <div class="detail-submeta">
+          <span class="rating">
+            <i class="fa-solid fa-star"></i>
+            <span id="detail-rating">4.95</span>
+          </span>
+          <span>•</span>
+          <span id="detail-reviews" style="font-weight: 600; text-decoration: underline;">120 avis</span>
+          <span>•</span>
+          <span id="detail-type-name" style="font-weight: 600; color: var(--primary);">Appartement de standing</span>
+          <span>•</span>
+          <span id="detail-location"><i class="fa-solid fa-location-dot" style="margin-right: 4px;"></i> Paris, France</span>
+        </div>
+      </div>
+
+      <!-- Galerie photos (1 grande + 4 miniatures) -->
+      <div class="detail-photo-gallery" id="detail-gallery">
+        <!-- Rempli par JavaScript -->
+      </div>
+
+      <!-- Grille 2 colonnes (Infos à gauche / Widget de réservation à droite) -->
+      <div class="detail-body-grid">
+        <div class="detail-main-info">
+          <!-- Présentation de l'hôte -->
+          <div class="host-summary-row">
+            <div class="host-text">
+              <h3 id="detail-host-name">Logement proposé par Jean</h3>
+              <p id="detail-host-status">Superhôte vérifié • Répond en moins d'une heure</p>
+            </div>
+            <img src="" alt="Hôte" class="host-avatar-large" id="detail-host-avatar" />
+          </div>
+
+          <!-- Caractéristiques couchages -->
+          <div style="padding: 16px 0; border-bottom: 1px solid var(--border-light);">
+            <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 4px;">Capacité d'accueil</h4>
+            <p id="detail-specs-summary" style="color: var(--text-muted); font-size: 0.95rem;"></p>
+          </div>
+
+          <!-- Spécificité Hôtels : Sélection des types de chambres -->
+          <div class="hotel-rooms-section" id="detail-hotel-rooms-section" style="display: none;">
+            <h4><i class="fa-solid fa-bed"></i> Choisissez votre type de chambre</h4>
+            <div id="detail-hotel-rooms-list">
+              <!-- Rempli par JS si c'est un hôtel -->
+            </div>
+          </div>
+
+          <!-- Description complète -->
+          <div>
+            <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;">À propos de ce logement</h4>
+            <p id="detail-description" style="color: var(--text-main); font-size: 0.96rem; line-height: 1.7;"></p>
+          </div>
+
+          <!-- Équipements -->
+          <div>
+            <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 16px;">Ce que propose ce logement</h4>
+            <div class="amenities-grid" id="detail-amenities-list">
+              <!-- Rempli par JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne de droite : Widget de réservation dynamique -->
+        <aside>
+          <div class="booking-sticky-card">
+            <div class="booking-card-header">
+              <div class="price-display">
+                <span id="book-price-display">250 €</span>
+                <span>/ nuit</span>
+              </div>
+            </div>
+
+            <!-- Boîte de dates et voyageurs -->
+            <div class="booking-inputs-box">
+              <div class="booking-dates-row">
+                <div class="booking-date-field">
+                  <label for="book-checkin">Arrivée</label>
+                  <input type="date" id="book-checkin" />
+                </div>
+                <div class="booking-date-field">
+                  <label for="book-checkout">Départ</label>
+                  <input type="date" id="book-checkout" />
+                </div>
+              </div>
+              <div class="booking-guests-field">
+                <label for="book-guests">Voyageurs</label>
+                <select id="book-guests">
+                  <option value="1">1 voyageur</option>
+                  <option value="2">2 voyageurs</option>
+                  <option value="4">4 voyageurs</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Bouton Réserver -->
+            <button class="btn-book-cta" id="btn-book-cta">
+              <i class="fa-solid fa-lock" style="margin-right: 8px;"></i>
+              Réserver ce séjour
+            </button>
+            <p style="text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 16px;">
+              Aucun montant ne sera débité pour l'instant
+            </p>
+
+            <!-- Décomposition dynamique des tarifs -->
+            <div class="price-breakdown-table">
+              <div class="breakdown-row">
+                <span id="book-breakdown-nights-label">250 € x 4 nuits</span>
+                <span id="book-breakdown-nights-val">1 000 €</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Frais de ménage</span>
+                <span id="book-breakdown-cleaning-val">50 €</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Frais de service StayLuxe</span>
+                <span id="book-breakdown-service-val">120 €</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Taxes de séjour</span>
+                <span id="book-breakdown-taxes-val">50 €</span>
+              </div>
+              <div class="breakdown-row total-row">
+                <span>Total TTC</span>
+                <span id="book-breakdown-total-val">1 220 €</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2 : TUNNEL DE RÉSERVATION & CHECKOUT SÉCURISÉ
+       ========================================================================== -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-content-card checkout-modal-card">
+      <button class="modal-close-btn" id="modal-checkout-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Écran 1 : Formulaire de réservation -->
+      <div id="checkout-form-container">
+        <h3 class="checkout-step-title">Finaliser votre réservation</h3>
+
+        <!-- Récapitulatif du séjour -->
+        <div class="checkout-stay-summary">
+          <img src="" alt="" class="checkout-stay-thumb" id="checkout-thumb" />
+          <div>
+            <h4 id="checkout-title" style="font-size: 1rem; font-weight: 700;"></h4>
+            <p id="checkout-room-info" style="font-size: 0.85rem; color: var(--primary); font-weight: 600;"></p>
+            <p id="checkout-dates" style="font-size: 0.82rem; color: var(--text-muted);"></p>
+            <div style="font-weight: 800; font-size: 1.05rem; margin-top: 4px;" id="checkout-total-price"></div>
+          </div>
+        </div>
+
+        <form id="checkout-form">
+          <div class="form-group">
+            <label for="traveler-name">Nom complet du voyageur principal</label>
+            <input type="text" id="traveler-name" class="form-input" placeholder="Ex: Jean Dupont" required />
+          </div>
+
+          <div class="form-group">
+            <label for="traveler-email">Adresse e-mail pour la confirmation</label>
+            <input type="email" id="traveler-email" class="form-input" placeholder="jean.dupont@email.com" required />
+          </div>
+
+          <div class="form-group">
+            <label>Mode de règlement sécurisé</label>
+            <div class="payment-options-grid">
+              <div class="payment-method-card selected">
+                <i class="fa-solid fa-credit-card" style="color: var(--primary);"></i>
+                <span style="font-size: 0.82rem; font-weight: 700;">Carte Bancaire</span>
+              </div>
+              <div class="payment-method-card">
+                <i class="fa-brands fa-paypal" style="color: #003087;"></i>
+                <span style="font-size: 0.82rem; font-weight: 700;">PayPal</span>
+              </div>
+              <div class="payment-method-card">
+                <i class="fa-brands fa-apple" style="color: #000;"></i>
+                <span style="font-size: 0.82rem; font-weight: 700;">Apple Pay</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="card-num">Numéro de carte de test</label>
+            <input type="text" id="card-num" class="form-input" placeholder="•••• •••• •••• 4242" value="4532 8900 1234 4242" required />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label for="card-exp">Expiration</label>
+              <input type="text" id="card-exp" class="form-input" placeholder="MM/AA" value="12/28" required />
+            </div>
+            <div class="form-group">
+              <label for="card-cvc">CVC</label>
+              <input type="text" id="card-cvc" class="form-input" placeholder="CVC" value="894" required />
+            </div>
+          </div>
+
+          <button type="submit" class="btn-book-cta" id="btn-confirm-payment" style="margin-top: 12px;">
+            Confirmer et Payer
+          </button>
+        </form>
+      </div>
+
+      <!-- Écran 2 : Confirmation de succès -->
+      <div id="checkout-success-container" class="booking-success-box" style="display: none;">
+        <div class="success-icon-badge">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 8px;">Réservation confirmée !</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+          Votre confirmation et vos codes d'accès ont été envoyés par e-mail.
+        </p>
+        <div style="background: var(--bg-surface); padding: 14px; border-radius: var(--radius-md); display: inline-block; margin-bottom: 24px;">
+          <span style="font-size: 0.82rem; color: var(--text-muted); display: block;">Référence du séjour</span>
+          <strong id="confirmed-booking-id" style="font-size: 1.2rem; color: var(--secondary); letter-spacing: 1px;"></strong>
+        </div>
+        <div>
+          <button class="btn-search-main" style="margin: 0 auto;" onclick="closeAllModals()">
+            Retour aux séjours
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 3 : DASHBOARD PROPRIÉTAIRE / HÔTE (PUBLIER ANNONCE)
+       ========================================================================== -->
+  <div class="modal-overlay" id="host-modal">
+    <div class="modal-content-card" style="max-width: 650px;">
+      <button class="modal-close-btn" id="modal-host-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <h3 class="checkout-step-title">
+        <i class="fa-solid fa-house-chimney" style="color: var(--primary); margin-right: 8px;"></i>
+        Publier votre hébergement
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+        Rejoignez des milliers d'hôtes et gagnez des revenus en louant votre appartement, votre villa ou votre hôtel.
+      </p>
+
+      <form id="host-form">
+        <div class="form-group">
+          <label for="host-title">Titre de l'annonce</label>
+          <input type="text" id="host-title" class="form-input" placeholder="Ex: Loft avec terrasse vue Panthéon" required />
+        </div>
+
+        <div class="host-form-grid">
+          <div class="form-group">
+            <label for="host-type">Type de propriété</label>
+            <select id="host-type" class="form-input" required>
+              <option value="apartment">Appartement</option>
+              <option value="house">Maison / Villa</option>
+              <option value="hotel">Chambre d'Hôtel</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="host-price">Prix par nuit (€)</label>
+            <input type="number" id="host-price" class="form-input" placeholder="Ex: 240" min="10" required />
+          </div>
+        </div>
+
+        <div class="host-form-grid">
+          <div class="form-group">
+            <label for="host-city">Ville</label>
+            <input type="text" id="host-city" class="form-input" placeholder="Ex: Nice" required />
+          </div>
+          <div class="form-group">
+            <label for="host-country">Pays</label>
+            <input type="text" id="host-country" class="form-input" placeholder="Ex: France" required />
+          </div>
+        </div>
+
+        <div class="host-form-grid">
+          <div class="form-group">
+            <label for="host-guests">Voyageurs max.</label>
+            <input type="number" id="host-guests" class="form-input" value="4" min="1" required />
+          </div>
+          <div class="form-group">
+            <label for="host-bedrooms">Nombre de chambres</label>
+            <input type="number" id="host-bedrooms" class="form-input" value="2" min="1" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="host-desc">Description de votre propriété</label>
+          <textarea id="host-desc" class="form-input" rows="3" placeholder="Décrivez l'ambiance, les atouts et le quartier..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-book-cta">
+          Mettre en ligne l'annonce immédiatement
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer-main">
+    <div class="container">
+      <div class="footer-columns">
+        <div class="footer-col">
+          <h4>Assistance</h4>
+          <ul>
+            <li><a href="#">Centre d'aide & FAQ</a></li>
+            <li><a href="#">AirCover pour les hôtes</a></li>
+            <li><a href="#">Lutte contre la discrimination</a></li>
+            <li><a href="#">Assistance personnes handicapées</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Accueil de voyageurs</h4>
+          <ul>
+            <li><a href="#">Devenir hôte StayLuxe</a></li>
+            <li><a href="#">Protection pour les propriétaires</a></li>
+            <li><a href="#">Ressources pour hébergeurs</a></li>
+            <li><a href="#">Forum de la communauté</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Destinations populaires</h4>
+          <ul>
+            <li><a href="#">Appartements à Paris</a></li>
+            <li><a href="#">Villas de luxe à Bali</a></li>
+            <li><a href="#">Hôtels 5 étoiles à New York</a></li>
+            <li><a href="#">Chalets dans les Alpes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>StayLuxe</h4>
+          <ul>
+            <li><a href="#">Espace presse</a></li>
+            <li><a href="#">Nouvelles fonctionnalités</a></li>
+            <li><a href="#">Carrières & Recrutement</a></li>
+            <li><a href="#">Investisseurs</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div>
+          &copy; 2026 StayLuxe Inc. Tous droits réservés. • <a href="#">Confidentialité</a> • <a href="#">Conditions générales</a> • <a href="#">Plan du site</a>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: center;">
+          <span><i class="fa-solid fa-globe"></i> Français (FR)</span>
+          <span><i class="fa-solid fa-euro-sign"></i> EUR (€)</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS (Carte interactive) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Données & Moteur Applicatif -->
+  <script src="rental-data.js"></script>
+  <script src="rental.js"></script>
+</body>
+</html>
